@@ -11,6 +11,7 @@ class OrdersScreen extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(title: const Text("Order History")),
       body: StreamBuilder<QuerySnapshot>(
         stream:
@@ -26,7 +27,7 @@ class OrdersScreen extends StatelessWidget {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text("No past orders."));
+            return const Center(child: Text("No past orders.", style: TextStyle(fontSize: 18),));
           }
 
           final docs = snapshot.data!.docs;
@@ -40,6 +41,7 @@ class OrdersScreen extends StatelessWidget {
               }).toList();
 
           return ListView.builder(
+
             itemCount: orders.length,
             itemBuilder: (context, index) {
               final order = orders[index];

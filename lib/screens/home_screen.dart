@@ -46,11 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
         .doc(user?.uid);
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       //Nav Bar
       appBar: AppBar(
         title: Text("Shop Home"),
         actions: [
-          
+
           //Cart Button
           IconButton(
             icon: Icon(Icons.shopping_cart),
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(builder: (_) => ProductListScreen()),
                     );
                   },
-                  child: const Text("Browse Products"),
+                  child: const Text("Browse Products", style: TextStyle(fontSize: 18),),
                 ),
                 const SizedBox(height: 16),
 
@@ -125,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(builder: (_) => AdminDashboard()),
                       );
                     },
-                    child: const Text("Admin Dashboard"),
+                    child: const Text("Admin Dashboard", style: TextStyle(fontSize: 18),),
                   ),
 
                 // Rewards Check
@@ -137,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(builder: (_) => RewardsScreen()),
                       );
                     },
-                    child: Text("Rewards"),
+                    child: Text("Rewards", style: TextStyle(fontSize: 18)),
                   ),
               ],
             ),

@@ -17,10 +17,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shop App',
-      theme: ThemeData(primarySwatch: Colors.teal),
-      home: AuthWrapper(),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/background.png'),
+          fit: BoxFit.cover, 
+        ),
+      ),
+      child: MaterialApp(
+        title: 'Shop App',
+        theme: ThemeData(primarySwatch: Colors.teal),
+        home: const AuthWrapper(),
+      ),
+    );
+  }
+}
+
+class BackgroundWrapper extends StatelessWidget {
+  final Widget child;
+
+  const BackgroundWrapper({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/background.png',
+            fit: BoxFit.cover,
+          ),
+        ),
+        child,
+      ],
     );
   }
 }
@@ -36,7 +65,9 @@ class AuthWrapper extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         }
-        return snapshot.hasData ? HomeScreen() : LoginScreen();
+        final screen = snapshot.hasData ? HomeScreen() : LoginScreen();
+
+        return BackgroundWrapper(child: screen);
       },
     );
   }

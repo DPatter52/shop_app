@@ -25,24 +25,36 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(title: Text("Login")),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(5),
         child: Column(
           children: [
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: "Email"),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(labelText: "Email"),
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    TextField(
+                      controller: passwordController,
+                      decoration: InputDecoration(labelText: "Password"),
+                      obscureText: true,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: "Password"),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
+            SizedBox(height: 25),
             ElevatedButton(
               onPressed: () => _login(context),
-              child: Text("Login"),
+              child: Text("Login", style: TextStyle(fontSize: 15)),
             ),
             TextButton(
               onPressed:

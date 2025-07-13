@@ -85,6 +85,7 @@ class _AdminUpdateProductState extends State<AdminUpdateProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(title: const Text("Update Product")),
       body: Padding(
         padding: const EdgeInsets.all(16),

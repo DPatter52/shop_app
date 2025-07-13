@@ -43,6 +43,7 @@ class _AdminCreateProductState extends State<AdminCreateProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(title: const Text("Create New Product")),
       body: Padding(
         padding: const EdgeInsets.all(16),

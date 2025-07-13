@@ -11,21 +11,38 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(title: Text(product.title)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(product.title, style: Theme.of(context).textTheme.titleLarge),
-            SizedBox(height: 10),
-            Text(product.description),
-            SizedBox(height: 20),
-            Text(
-              '\$${product.price.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.title,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(product.description),
+                    const SizedBox(height: 20),
+                    Text(
+                      '\$${product.price.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            Spacer(),
+            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -33,11 +50,11 @@ class ProductDetailScreen extends StatelessWidget {
                     context,
                     listen: false,
                   ).addItem(product.id, product.title, product.price);
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('Added to cart!')));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Added to cart!')),
+                  );
                 },
-                child: Text('Add to Cart'),
+                child: const Text('Add to Cart'),
               ),
             ),
           ],

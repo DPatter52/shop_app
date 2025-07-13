@@ -13,6 +13,7 @@ class CheckoutScreen extends StatelessWidget {
     final total = cart.totalAmount;
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(title: const Text("Checkout")),
       body: Padding(
         padding: const EdgeInsets.all(16),

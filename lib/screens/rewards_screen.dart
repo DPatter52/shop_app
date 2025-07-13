@@ -57,6 +57,7 @@ class RewardsScreen extends StatelessWidget {
         final userPoints = snapshot.data!;
 
         return Scaffold(
+          backgroundColor: Colors.transparent,
           appBar: AppBar(title: const Text('Rewards')),
           body: Column(
             children: [

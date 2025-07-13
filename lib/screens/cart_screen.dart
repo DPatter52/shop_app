@@ -13,6 +13,7 @@ class CartScreen extends StatelessWidget {
     final productKeys = cart.items.keys.toList();
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(title: const Text("Your Cart")),
       body: Column(
         children: [
@@ -48,6 +49,14 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+
+          if (cart.items.isEmpty)
+            const Center(
+              child: Text(
+                "Your cart is empty.",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
 
           Expanded(
             child: ListView.builder(
