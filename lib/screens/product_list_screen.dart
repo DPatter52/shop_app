@@ -11,6 +11,8 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
+  final List<String> _categories = ['All', 'Hair', 'Beard', 'Skin'];
+  String _selectedCategory = 'All';
   final TextEditingController _searchController = TextEditingController();
   String _searchTerm = '';
 
@@ -48,9 +50,30 @@ class _ProductListScreenState extends State<ProductListScreen> {
               ),
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: _selectedCategory,
+              items:
+                  _categories.map((category) {
+                    return DropdownMenuItem<String>(
+                      value: category,
+                      child: Text(category),
+                    );
+                  }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _selectedCategory = value!;
+                });
+              },
+            ),
+          ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('products').snapshots(),
+              stream:
+                  FirebaseFirestore.instance.collection('products').snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -66,15 +89,28 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
                 final docs = snapshot.data!.docs;
 
-                final products = docs
-                    .map((doc) => Product.fromFirestore(
-                          doc.data()! as Map<String, dynamic>,
-                          doc.id,
-                        ))
-                    .where((product) =>
-                        product.title.toLowerCase().contains(_searchTerm) ||
-                        product.description.toLowerCase().contains(_searchTerm))
-                    .toList();
+                final products =
+                    docs
+                        .map(
+                          (doc) => Product.fromFirestore(
+                            doc.data()! as Map<String, dynamic>,
+                            doc.id,
+                          ),
+                        )
+                        .where((product) {
+                          final matchesSearch =
+                              product.title.toLowerCase().contains(
+                                _searchTerm,
+                              ) ||
+                              product.description.toLowerCase().contains(
+                                _searchTerm,
+                              );
+                          final matchesCategory =
+                              _selectedCategory == 'All' ||
+                              product.category == _selectedCategory;
+                          return matchesSearch && matchesCategory;
+                        })
+                        .toList();
 
                 if (products.isEmpty) {
                   return const Center(child: Text('No matching products.'));
@@ -94,7 +130,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => ProductDetailScreen(product: product),
+                              builder:
+                                  (_) => ProductDetailScreen(product: product),
                             ),
                           );
                         },

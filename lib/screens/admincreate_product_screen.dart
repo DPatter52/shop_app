@@ -16,6 +16,7 @@ class _AdminCreateProductState extends State<AdminCreateProduct> {
   final _descController = TextEditingController();
   final _priceController = TextEditingController();
   final _imageUrlController = TextEditingController();
+  final _categoryController = TextEditingController();
 
   void _addProduct() async {
     if (!_formKey.currentState!.validate()) return;
@@ -27,6 +28,7 @@ class _AdminCreateProductState extends State<AdminCreateProduct> {
         'price': double.parse(_priceController.text.trim()),
         'imageUrl': _imageUrlController.text.trim(),
         'createdAt': Timestamp.now(),
+        'category': _categoryController.text.trim(),
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -96,6 +98,16 @@ class _AdminCreateProductState extends State<AdminCreateProduct> {
                         validator:
                             (value) =>
                                 value!.isEmpty ? 'Enter image URL' : null,
+                      ),
+
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: _categoryController,
+                        decoration: const InputDecoration(
+                          labelText: "Category",
+                        ),
+                        validator:
+                            (value) => value!.isEmpty ? 'Enter Category' : null,
                       ),
                     ],
                   ),
