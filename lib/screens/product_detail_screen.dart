@@ -42,7 +42,6 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: () {

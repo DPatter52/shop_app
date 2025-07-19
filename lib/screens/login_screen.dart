@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  // final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 

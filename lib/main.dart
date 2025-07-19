@@ -21,12 +21,12 @@ class MyApp extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/background.png'),
-          fit: BoxFit.cover, 
+          fit: BoxFit.cover,
         ),
       ),
       child: MaterialApp(
         title: 'Shop App',
-        theme: ThemeData(primarySwatch: Colors.teal),
+        // theme: ThemeData(primarySwatch: Colors.teal),
         home: const AuthWrapper(),
       ),
     );
@@ -43,11 +43,17 @@ class BackgroundWrapper extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset(
-            'assets/background.png',
-            fit: BoxFit.cover,
+          child: Opacity(
+            opacity: 0.2,
+            child: Image.asset(
+              'assets/background.png',
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
+
         child,
       ],
     );

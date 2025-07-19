@@ -3,13 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupScreen extends StatelessWidget {
+  final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   SignupScreen({super.key});
 
   void _signup(BuildContext context) async {
-    if (emailController.text.trim().isEmpty ||
+    if (usernameController.text.trim().isEmpty ||
+        emailController.text.trim().isEmpty ||
         passwordController.text.trim().isEmpty) {
       ScaffoldMessenger.of(
         context,
@@ -31,6 +33,7 @@ class SignupScreen extends StatelessWidget {
         'role': 'user',
         'createdAt': Timestamp.now(),
         'points': 0,
+        'username': usernameController.text.trim(),
       });
 
       Navigator.pop(context);
@@ -50,6 +53,10 @@ class SignupScreen extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
+            // TextField(
+            //   controller: usernameController,
+            //   decoration: InputDecoration(labelText: "Username"),
+            // ),
             TextField(
               controller: emailController,
               decoration: InputDecoration(labelText: "Email"),
