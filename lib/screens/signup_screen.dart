@@ -53,19 +53,29 @@ class SignupScreen extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            // TextField(
-            //   controller: usernameController,
-            //   decoration: InputDecoration(labelText: "Username"),
-            // ),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: "Email"),
+            Card(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: usernameController,
+                      decoration: InputDecoration(labelText: "Username"),
+                    ),
+                    TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(labelText: "Email"),
+                    ),
+                    TextField(
+                      controller: passwordController,
+                      decoration: InputDecoration(labelText: "Password"),
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+              ),
             ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: "Password"),
-              obscureText: true,
-            ),
+
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => _signup(context),

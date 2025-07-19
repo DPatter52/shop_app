@@ -74,13 +74,17 @@ class AdminDashboard extends StatelessWidget {
                       final product = products[index];
                       final data = product.data() as Map<String, dynamic>;
 
-                      return ListTile(
+                      
+                      return Card (
+                        child: ListTile(
                         title: Text(data['title'] ?? 'No Title'),
                         subtitle: Text(
                           "\$${data['price']?.toStringAsFixed(2) ?? '0.00'}",
                         ),
                         onTap: () => _navigateToEdit(context, product),
+                      )
                       );
+                  
                     },
                   );
                 },

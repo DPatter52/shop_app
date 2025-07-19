@@ -89,11 +89,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final userData = snapshot.data!.data() as Map<String, dynamic>;
           final points = userData['points'] ?? 0;
+          final username = userData['username'] ?? 'User';
 
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  "Welcome, $username!",
+                  style: const TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
                 if (_userRole == 'user')
                   Text(
                     "Your Reward Points: $points",

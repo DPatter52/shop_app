@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         title: 'Shop App',
-        // theme: ThemeData(primarySwatch: Colors.teal),
+        theme: ThemeData(primarySwatch: Colors.teal),
         home: const AuthWrapper(),
       ),
     );

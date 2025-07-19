@@ -51,37 +51,57 @@ class _AdminCreateProductState extends State<AdminCreateProduct> {
           key: _formKey,
           child: ListView(
             children: [
-              TextFormField(
-                controller: _titleController,
-                decoration: const InputDecoration(labelText: "Title"),
-                validator: (value) => value!.isEmpty ? 'Enter title' : null,
+              Card(
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _titleController,
+                        decoration: const InputDecoration(labelText: "Title"),
+                        validator:
+                            (value) => value!.isEmpty ? 'Enter title' : null,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: _descController,
+                        decoration: const InputDecoration(
+                          labelText: "Description",
+                        ),
+                        validator:
+                            (value) =>
+                                value!.isEmpty ? 'Enter description' : null,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: _priceController,
+                        decoration: const InputDecoration(labelText: "Price"),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Enter price';
+                          }
+                          final price = double.tryParse(value);
+                          return (price == null || price < 0)
+                              ? 'Enter valid price'
+                              : null;
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: _imageUrlController,
+                        decoration: const InputDecoration(
+                          labelText: "Image URL",
+                        ),
+                        validator:
+                            (value) =>
+                                value!.isEmpty ? 'Enter image URL' : null,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _descController,
-                decoration: const InputDecoration(labelText: "Description"),
-                validator:
-                    (value) => value!.isEmpty ? 'Enter description' : null,
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _priceController,
-                decoration: const InputDecoration(labelText: "Price"),
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) return 'Enter price';
-                  final price = double.tryParse(value);
-                  return (price == null || price < 0)
-                      ? 'Enter valid price'
-                      : null;
-                },
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _imageUrlController,
-                decoration: const InputDecoration(labelText: "Image URL"),
-                validator: (value) => value!.isEmpty ? 'Enter image URL' : null,
-              ),
+
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _addProduct,
